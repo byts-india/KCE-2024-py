@@ -232,7 +232,37 @@ Use:
 - **`isdigit()`** for broader digit checks (including superscripts).
 - **`isnumeric()`** for the most inclusive numeric checks (including fractions).
 
-Let me know if you'd like further clarification!
+
+### A Correct Example Where Only `isdigit()` Returns `True`
+If you want a case where `isdigit()` returns `True`, but both `isnumeric()` and `isdecimal()` return `False`, **there are none.** All characters where `isdigit()` is `True` are either `numeric` or `decimal`.
+
+---
+
+### Example Clarification
+If you're looking for differences among the three methods, here’s a practical demonstration:
+
+```python
+examples = ["²", "⅓", "10", "5.5", "3", "abc"]
+
+for char in examples:
+    print(f"Character: '{char}'")
+    print(f"  isdigit(): {char.isdigit()}")
+    print(f"  isnumeric(): {char.isnumeric()}")
+    print(f"  isdecimal(): {char.isdecimal()}")
+    print()
+```
+
+### Output Explanation:
+| Character | `isdigit()` | `isnumeric()` | `isdecimal()` | Explanation                              |
+|-----------|-------------|---------------|---------------|------------------------------------------|
+| `"²"`     | `True`      | `True`        | `False`       | Superscript 2 is numeric, not decimal.  |
+| `"⅓"`     | `False`     | `True`        | `False`       | Fraction is numeric but not a digit.    |
+| `"10"`    | `True`      | `True`        | `True`        | A regular number passes all checks.     |
+| `"5.5"`   | `False`     | `False`       | `False`       | Float numbers don't pass any checks.    |
+| `"3"`     | `True`      | `True`        | `True`        | A single digit passes all checks.       |
+| `"abc"`   | `False`     | `False`       | `False`       | Letters fail all numeric checks.        |
+
+For superscripts like `"²"`, both `isdigit()` and `isnumeric()` return `True`, but `isdecimal()` does not.
 
 #### **5. Splitting and Joining**
 
